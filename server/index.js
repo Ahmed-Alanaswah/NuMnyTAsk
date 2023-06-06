@@ -1,6 +1,9 @@
+const config = require("config");
 const express = require("express");
 const cors = require("cors");
 const app = express();
+
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
@@ -8,8 +11,11 @@ app.use(cors());
 const db = require("./models");
 
 //routers
-const userRouter = require("./routes/Users");
-app.use("/Users", userRouter);
+const userRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
+
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
