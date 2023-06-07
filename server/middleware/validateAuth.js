@@ -1,4 +1,4 @@
-const { authSchema } = require("../helpers/validationAuth");
+const { authSchema } = require("../validations/validationAuth");
 
 const validateAuth = async (req, res, next) => {
   try {
