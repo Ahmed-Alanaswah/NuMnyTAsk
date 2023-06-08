@@ -40,12 +40,13 @@ module.exports = (sequelize, DataTypes) => {
 
     lastLoginDateTime: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: "",
     },
 
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false,
     },
   });

@@ -7,7 +7,7 @@ const { validateUser } = require("../middleware/validateUser");
 const { auth } = require("../middleware/auth");
 const { admin } = require("../middleware/admin");
 
-router.get("/", auth, admin, async (req, res) => {
+router.get("/", async (req, res) => {
   const listOfUser = await Users.findAll();
   res.json(listOfUser);
 });
@@ -31,6 +31,7 @@ router.post("/", [auth, admin, validateUser], async (req, res) => {
 
     res.json(_.pick(User, ["name", "email"]));
   } catch (error) {
+    console.log("==========", error);
     // Handle other errors
     res.status(500).json({ error: "Internal server error" });
   }

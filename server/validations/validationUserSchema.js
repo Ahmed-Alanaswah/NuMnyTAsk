@@ -8,8 +8,8 @@ const userSchema = Joi.object({
   status: Joi.string().required(),
   gender: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
-  lastLoginDateTime: Joi.string().required(),
-  isAdmin: Joi.boolean().required(),
+  lastLoginDateTime: Joi.string(),
+  isAdmin: Joi.bool(),
 });
 
 module.exports = { userSchema };

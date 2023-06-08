@@ -21,6 +21,7 @@ router.post("/", validateAuth, async (req, res) => {
   const secretKey = process.env.SECRET_KEY;
   const token = jwt.sign(
     _.pick(user, [
+      "id",
       "name",
       "email",
       "phone",
