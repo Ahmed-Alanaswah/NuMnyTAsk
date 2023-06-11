@@ -6,8 +6,6 @@
   padding: 15px;
   width: 50%;
   margin: auto;
-  /* align-items: center; */
-  /* background-color: aquamarine; */
   border: 2px solid #5fa089;
   flex-direction: column;
 }
@@ -15,13 +13,13 @@
 .formContainer label {
   margin-bottom: 10px;
 }
+
 .formContainer input {
-  /* width: 50%; */
   padding: 10px;
   margin-bottom: 10px;
 }
+
 .formContainer button {
-  /* width: 50%; */
   padding: 10px;
   background-color: #5fa089;
   border: none;
@@ -31,6 +29,11 @@
 
 .formContainer button:hover {
   background-color: #5f82a0;
+}
+
+.formContainer select {
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .formContainer span {

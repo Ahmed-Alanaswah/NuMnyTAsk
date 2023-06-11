@@ -1,0 +1,39 @@
+.cardsContainer {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 30px;
+  padding: 30px;
+}
+
+.card {
+  border: 1px solid #5fa089;
+  border-radius: 5px;
+  padding: 15px;
+  position: relative;
+}
+
+.card input {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.card div {
+  font-size: 20px;
+  padding: 10px 5px;
+}
+
+.deleteButton {
+  background-color: #be1c35;
+  border: none;
+  color: #fff;
+  margin: 0 30px 30px;
+  transition: 0.5s ease-in;
+  padding: 10px 30px;
+}
+
+.deleteButton:hover {
+  background-color: #ff9e9e;
+}

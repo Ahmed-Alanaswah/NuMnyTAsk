@@ -1,8 +1,11 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { Route, Routes, redirect } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import jwt from "jwt-decode";
+import ClaimedDeals from "../pages/ClaimedDeals";
+import UserProfile from "../pages/UserProfile";
+import UploadImage from "../pages/UploadImage";
 
 const Home = lazy(() => import("../pages/Home"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -44,6 +47,9 @@ const RoutesContainer = () => {
             <Route path="/create-user" element={<CreateUser />} />
             <Route path="/users" element={<Users />} />
             <Route path="/deals" element={<Deals />} />
+            <Route path="/claim-deals" element={<ClaimedDeals />} />
+            <Route path="/users/:id" element={<UserProfile />} />
+            <Route path="/upload" element={<UploadImage />} />
           </>
         ) : (
           <Route path="/login" element={<LoginPage />} />

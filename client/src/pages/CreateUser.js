@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/formContainer.module.css";
 import { userServices } from "../services/user.services";
 
-const LoginPage = () => {
+const CreateUser = () => {
   const initialValues = {
     name: "",
     email: "",
     password: "",
     phone: "",
-    status: "",
-    gender: "",
+    status: "Active",
+    gender: "male",
     dateOfBirth: "",
   };
 
@@ -23,7 +23,8 @@ const LoginPage = () => {
       await userServices.createUser(data);
       navigate("/users");
     } catch (err) {
-      alert(err.response.data);
+      console.log(err);
+      alert(err?.response?.data || err?.response || err);
     }
   };
 
@@ -34,44 +35,55 @@ const LoginPage = () => {
         onSubmit={onSubmit}
         validationSchema={CreateUsersValidation}
       >
-        <Form className={styles.formContainer}>
-          <label>Name: </label>
-          <ErrorMessage name="name" component="span" />
-          <Field autoComplete="off" name="name" placeholder="Name..." />
+        {({ setFieldValue }) => (
+          <Form className={styles.formContainer} encType="multipart/form-data">
+            <label>Name: </label>
+            <ErrorMessage name="name" component="span" />
+            <Field autoComplete="off" name="name" placeholder="Name..." />
 
-          <label>Email: </label>
-          <ErrorMessage name="email" component="span" />
-          <Field autoComplete="off" name="email" placeholder="Email..." />
+            <label>Email: </label>
+            <ErrorMessage name="email" component="span" />
+            <Field autoComplete="off" name="email" placeholder="Email..." />
 
-          <label>Password: </label>
-          <ErrorMessage name="password" component="span" />
-          <Field
-            type="password"
-            autoComplete="off"
-            name="password"
-            placeholder="password..."
-          />
+            <label>Password: </label>
+            <ErrorMessage name="password" component="span" />
+            <Field
+              type="password"
+              autoComplete="off"
+              name="password"
+              placeholder="password..."
+            />
 
-          <label>Phone: </label>
-          <ErrorMessage name="phone" component="span" />
-          <Field autoComplete="off" name="phone" placeholder="phone..." />
+            <label>Phone: </label>
+            <ErrorMessage name="phone" component="span" />
+            <Field autoComplete="off" name="phone" placeholder="phone..." />
 
-          <label>Status: </label>
-          <ErrorMessage name="status" component="span" />
-          <Field autoComplete="off" name="status" placeholder="status..." />
+            <label>Status: </label>
+            <ErrorMessage name="status" component="span" />
+            <Field as="select" name="status">
+              <option value="Active">Active</option>
+              <option value="In Active">In Active</option>
+              <option value="Delete">Delete</option>
+              <option value="Expired">Expired</option>
+            </Field>
 
-          <label>Gender: </label>
-          <ErrorMessage name="gender" component="span" />
-          <Field autoComplete="off" name="gender" placeholder="gender..." />
+            <label>Gender: </label>
+            <ErrorMessage name="gender" component="span" />
+            <Field as="select" name="gender">
+              <option value="male">male</option>
+              <option value="female">female</option>
+            </Field>
 
-          <label>Date of birth </label>
-          <ErrorMessage name="dateOfBirth" component="span" />
-          <Field autoComplete="off" name="dateOfBirth" type="date" />
-          <button type="submit">Create User</button>
-        </Form>
+            <label>Date of birth </label>
+            <ErrorMessage name="dateOfBirth" component="span" />
+            <Field autoComplete="off" name="dateOfBirth" type="date" />
+
+            <button type="submit">Create User</button>
+          </Form>
+        )}
       </Formik>
     </div>
   );
 };
 
-export default LoginPage;
+export default CreateUser;

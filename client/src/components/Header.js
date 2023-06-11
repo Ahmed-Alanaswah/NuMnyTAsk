@@ -1,18 +1,37 @@
 import React, { useContext, useEffect } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import styles from "../styles/header.module.css";
 import { AuthContext } from "../context/AuthContext";
+import jwt from "jwt-decode";
+import { userServices } from "../services/user.services";
 
 const Header = () => {
-  const { user, isLogin, setIsLogin } = useContext(AuthContext);
+  const { user, setUser, isLogin, setIsLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(isLogin);
-  console.log(user);
-  const logout = () => {
-    localStorage.removeItem("token");
-    setIsLogin(false);
-    navigate("/login");
+  const token = localStorage.getItem("token");
+  const date = new Date(Date.now());
+
+  const logout = async () => {
+    try {
+      localStorage.removeItem("token");
+      setIsLogin(false);
+      navigate("/login");
+      await userServices.update(user?.id, { lastLoginDateTime: date });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    try {
+      if (token) {
+        const user = jwt(token);
+        setUser(user);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, [token]);
 
   return (
     <div className={styles.header}>
@@ -20,9 +39,16 @@ const Header = () => {
         {isLogin ? (
           <div className={styles.links}>
             <Link to="/">Home</Link>
-            <Link to="/create-user">Create user</Link>
-            {user?.isAdmin && <Link to="/users">Users</Link>}
-            <Link to="/deals">Deals</Link>
+            {user?.isAdmin && (
+              <>
+                <Link to="/create-user">Create user</Link>
+                <Link to="/users">Users</Link>
+                <Link to="/claim-deals">Claimed Deals</Link>
+              </>
+            )}
+
+            <Link to={`/deals?userId=${user?.id}`}>Deals</Link>
+            <Link to={`/users/${user?.id}`}>Profile</Link>
             <button className={styles.logout} onClick={logout}>
               Logout
             </button>

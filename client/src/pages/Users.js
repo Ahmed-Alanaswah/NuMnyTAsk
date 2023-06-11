@@ -1,22 +1,57 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import styles from "../styles/card.module.css";
+import { userServices } from "../services/user.services";
+import UserCard from "../components/UserCard";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
+  const handleCheckboxChange = (e, userId) => {
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setSelectedUsers([...selectedUsers, userId]);
+    } else {
+      setSelectedUsers(selectedUsers.filter((id) => id !== userId));
+    }
+  };
+
+  const deleteUsers = async () => {
+    await userServices.delete(selectedUsers);
+
+    setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
+    setSelectedUsers([]);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/users");
+        const res = await userServices.getUsers();
         setUsers(res.data);
       } catch (err) {
-        alert(err.response.data);
+        alert(err);
       }
     };
     fetchData();
   }, []);
 
-  return <div>users</div>;
+  return (
+    <>
+      <div className={styles.cardsContainer}>
+        {users.map((user) => (
+          <UserCard
+            key={user?.id}
+            user={user}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        ))}
+      </div>
+      <button onClick={deleteUsers} className={styles.deleteButton}>
+        delete users
+      </button>
+    </>
+  );
 };
 
 export default Users;

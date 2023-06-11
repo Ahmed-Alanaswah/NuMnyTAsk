@@ -49,6 +49,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: false,
     },
+
+    image: {
+      type: DataTypes.STRING,
+    },
   });
+
+  // Users.associate = (models) => {
+  //   // ClaimedDeal.belongsTo(models.Users);
+  //   ClaimedDeal.belongsTo(models.Deals);
+  // };
   return Users;
 };

@@ -10,6 +10,7 @@ const userSchema = Joi.object({
   dateOfBirth: Joi.string().required(),
   lastLoginDateTime: Joi.string(),
   isAdmin: Joi.bool(),
+  image: Joi.string(),
 });
 
 module.exports = { userSchema };

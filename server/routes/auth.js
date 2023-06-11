@@ -30,6 +30,7 @@ router.post("/", validateAuth, async (req, res) => {
       "dateOfBirth",
       "lastLoginDateTime",
       "isAdmin",
+      "image",
     ]),
     secretKey
   );
