@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { userServices } from "../services/user.services";
-import axios from "axios";
-
+import { getQueryParam } from "../helpers/helpers";
 const UploadImage = () => {
-  const userId = new URLSearchParams(document.location.search).get("userId");
+  const userId = getQueryParam("userId");
 
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
   };
-  console.log(userId);
+  console.log("=========", userId);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

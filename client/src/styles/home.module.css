@@ -1,0 +1,12 @@
+.home {
+  height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0fad7;
+}
+
+.home h1 {
+  margin: 0;
+  color: #5fa089;
+}

@@ -37,3 +37,14 @@
 .deleteButton:hover {
   background-color: #ff9e9e;
 }
+
+.searchInput {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.searchInput input {
+  padding: 10px 30px;
+  border-radius: 30px;
+}
