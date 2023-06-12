@@ -61,7 +61,7 @@ const Users = () => {
         {visibleUsers.map((user) => (
           <UserCard
             key={user?.id}
-            user={user}
+            userInfo={user}
             handleCheckboxChange={handleCheckboxChange}
           />
         ))}

@@ -1,27 +1,25 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { CreateUsersValidation } from "../validations/createUsers.schema";
+import { CreateDealValidation } from "../validations/createDeal.schema";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/formContainer.module.css";
-import { userServices } from "../services/user.services";
+import { dealServices } from "../services/deal.services";
 
-const CreateUser = () => {
+const CreateDeal = () => {
   const initialValues = {
     name: "",
-    email: "",
-    password: "",
-    phone: "",
     status: "Active",
-    gender: "male",
-    dateOfBirth: "",
+    currency: "JD",
+    amount: "",
+    description: "",
   };
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      await userServices.createUser(data);
-      navigate("/users");
+      await dealServices.createDeal(data);
+      navigate("/deals");
     } catch (err) {
       console.log(err);
       alert(err?.response?.data || err?.response || err);
@@ -33,29 +31,20 @@ const CreateUser = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
-        validationSchema={CreateUsersValidation}
+        validationSchema={CreateDealValidation}
       >
         <Form className={styles.formContainer} encType="multipart/form-data">
           <label>Name: </label>
           <ErrorMessage name="name" component="span" />
           <Field autoComplete="off" name="name" placeholder="Name..." />
 
-          <label>Email: </label>
-          <ErrorMessage name="email" component="span" />
-          <Field autoComplete="off" name="email" placeholder="Email..." />
-
-          <label>Password: </label>
-          <ErrorMessage name="password" component="span" />
+          <label>Description: </label>
+          <ErrorMessage name="description" component="span" />
           <Field
-            type="password"
             autoComplete="off"
-            name="password"
-            placeholder="password..."
+            name="description"
+            placeholder="Description..."
           />
-
-          <label>Phone: </label>
-          <ErrorMessage name="phone" component="span" />
-          <Field autoComplete="off" name="phone" placeholder="phone..." />
 
           <label>Status: </label>
           <ErrorMessage name="status" component="span" />
@@ -66,16 +55,17 @@ const CreateUser = () => {
             <option value="Expired">Expired</option>
           </Field>
 
-          <label>Gender: </label>
-          <ErrorMessage name="gender" component="span" />
-          <Field as="select" name="gender">
-            <option value="male">male</option>
-            <option value="female">female</option>
+          <label>Currency: </label>
+          <ErrorMessage name="currency" component="span" />
+          <Field as="select" name="currency">
+            <option value="JD">JD</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
           </Field>
 
-          <label>Date of birth </label>
-          <ErrorMessage name="dateOfBirth" component="span" />
-          <Field autoComplete="off" name="dateOfBirth" type="date" />
+          <label>Amount: </label>
+          <ErrorMessage name="amount" component="span" />
+          <Field autoComplete="off" name="amount" placeholder="Amount..." />
 
           <button type="submit">Create User</button>
         </Form>
@@ -84,4 +74,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default CreateDeal;

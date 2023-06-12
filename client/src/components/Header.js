@@ -44,6 +44,7 @@ const Header = () => {
                 <Link to="/create-user">Create user</Link>
                 <Link to="/users">Users</Link>
                 <Link to="/claim-deals">Claimed Deals</Link>
+                <Link to="/create-deals">Create Deals</Link>
               </>
             )}
 

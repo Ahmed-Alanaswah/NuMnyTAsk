@@ -49,10 +49,7 @@ const UserProfile = () => {
       <div>count claim deal: {countClaimDeal}</div>
       <div>total amount: {totalAmount} </div>
 
-      <button
-        type="submit"
-        onClick={() => navigate(`/upload?userId=${user?.id}`)}
-      >
+      <button onClick={() => navigate(`/upload?userId=${user?.id}`)}>
         Upload
       </button>
     </div>

@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   res.json(listOfDeal);
 });
 
-router.get("/:id", [auth], async (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
   const Deal = await Deals.findByPk(id);
   res.json(Deal);
@@ -23,6 +23,25 @@ router.post("/", [auth, admin, validateDeal], async (req, res) => {
     res.json(Deal);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const dealId = req.params.id;
+  const updatedDealData = req.body;
+
+  try {
+    const deal = await Deals.findByPk(dealId);
+
+    if (!deal) {
+      return res.status(404).json({ message: "Deal not found" });
+    }
+
+    await deal.update(updatedDealData);
+    res.json({ message: "Deal updated successfully" });
+  } catch (error) {
+    console.error("Error updating deal:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

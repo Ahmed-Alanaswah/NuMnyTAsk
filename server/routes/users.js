@@ -44,7 +44,6 @@ router.post("/", [auth, admin, validateUser], async (req, res) => {
     });
     res.json(User);
   } catch (error) {
-    console.log("**********", error);
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
@@ -63,12 +62,9 @@ router.put("/:id", async (req, res) => {
     }
 
     console.log(file);
-    // Update the user's data
     updatedUserData.image = (file && file.path) || null;
-    // await user.save();
     await user.update(updatedUserData);
-    // res.json({ message: "User updated successfully" });
-    return res.json(user);
+    res.json({ message: "User updated successfully" });
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ message: "Internal server error" });

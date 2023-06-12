@@ -7,4 +7,7 @@ export const dealServices = {
     }),
 
   getDeals: async () => await axios.get("http://localhost:3000/api/deals"),
+
+  update: async (dealId, data) =>
+    await axios.get(`http://localhost:3000/api/deals/${dealId}`, data),
 };
