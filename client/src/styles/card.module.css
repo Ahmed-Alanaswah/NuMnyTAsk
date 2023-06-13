@@ -25,19 +25,6 @@
   padding: 10px 5px;
 }
 
-.deleteButton {
-  background-color: #be1c35;
-  border: none;
-  color: #fff;
-  margin: 0 30px 30px;
-  transition: 0.5s ease-in;
-  padding: 10px 30px;
-}
-
-.deleteButton:hover {
-  background-color: #ff9e9e;
-}
-
 .searchInput {
   display: flex;
   justify-content: center;
@@ -47,4 +34,16 @@
 .searchInput input {
   padding: 10px 30px;
   border-radius: 30px;
+}
+.deleteButton {
+  background-color: #be1c35 !important;
+  border: none !important;
+  color: #fff !important;
+  margin: 0 30px 30px !important;
+  transition: 0.5s ease-in !important;
+  padding: 10px 30px !important;
+}
+
+.deleteButton:hover {
+  background-color: #ff9e9e !important;
 }

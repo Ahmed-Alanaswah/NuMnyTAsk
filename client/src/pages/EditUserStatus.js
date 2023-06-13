@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userServices } from "../services/user.services";
 import { getQueryParam } from "../helpers/helpers";
+import styles from "../styles/editPage.module.css";
+import Button from "../components/Button";
 
 const EditUserStatus = () => {
   const userId = getQueryParam("userId");
@@ -11,7 +13,6 @@ const EditUserStatus = () => {
 
   const handleStatusChange = (e) => setNewStatus(e.target.value);
 
-  console.log(newStatus);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -22,9 +23,9 @@ const EditUserStatus = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.editPage}>
       <div>
-        <label>Edit User Status:</label>
+        <h4>Edit User Status:</h4>
         <select value={newStatus} name="status" onChange={handleStatusChange}>
           <option value="Active">Active</option>
           <option value="In Active">In Active</option>
@@ -32,7 +33,7 @@ const EditUserStatus = () => {
           <option value="Expired">Expired</option>
         </select>
       </div>
-      <button type="submit">Update</button>
+      <Button type="submit">Update</Button>
     </form>
   );
 };

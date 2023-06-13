@@ -4,6 +4,7 @@ import { userServices } from "../services/user.services";
 import styles from "../styles/profile.module.css";
 import { image } from "../helpers/helpers";
 import { claimedDealServices } from "../services/claimedDeals.services";
+import Button from "../components/Button";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -49,9 +50,9 @@ const UserProfile = () => {
       <div>count claim deal: {countClaimDeal}</div>
       <div>total amount: {totalAmount} </div>
 
-      <button onClick={() => navigate(`/upload?userId=${user?.id}`)}>
+      <Button onClick={() => navigate(`/upload?userId=${user?.id}`)}>
         Upload
-      </button>
+      </Button>
     </div>
   );
 };

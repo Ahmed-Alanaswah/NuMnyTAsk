@@ -4,6 +4,7 @@ import { image } from "../helpers/helpers";
 import { AuthContext } from "../context/AuthContext";
 import jwt from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 const UserCard = ({ userInfo, handleCheckboxChange }) => {
   const { user, setUser } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const UserCard = ({ userInfo, handleCheckboxChange }) => {
   }, [token]);
 
   return (
-    <div className={styles.card} key={user?.id}>
+    <div data-testid="user-card" className={styles.card} key={user?.id}>
       <input
         type="checkbox"
         onChange={(event) => handleCheckboxChange(event, userInfo?.id)}
@@ -39,9 +40,9 @@ const UserCard = ({ userInfo, handleCheckboxChange }) => {
       <div>phone:{userInfo?.phone}</div>
       <div>status: {userInfo?.status}</div>
       {user?.isAdmin && (
-        <button onClick={() => navigate(`/edit-status?userId=${userInfo?.id}`)}>
+        <Button onClick={() => navigate(`/edit-status?userId=${userInfo?.id}`)}>
           edit status
-        </button>
+        </Button>
       )}
     </div>
   );

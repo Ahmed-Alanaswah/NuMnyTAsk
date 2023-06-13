@@ -3,7 +3,11 @@ import styles from "../styles/card.module.css";
 
 const ClaimedDealsCard = ({ claimedDeal }) => {
   return (
-    <div className={styles.card} key={claimedDeal?.id}>
+    <div
+      data-testid="claim-deal-card"
+      className={styles.card}
+      key={claimedDeal?.id}
+    >
       <div>userId: {claimedDeal?.UserId}</div>
       <div>dealId: {claimedDeal?.DealId}</div>
       <div>amount: {claimedDeal?.Deal?.amount}</div>

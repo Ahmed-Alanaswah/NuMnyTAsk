@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userServices } from "../services/user.services";
 import { getQueryParam } from "../helpers/helpers";
+import Button from "../components/Button";
+import styles from "../styles/editPage.module.css";
+
 const UploadImage = () => {
   const userId = getQueryParam("userId");
 
@@ -10,7 +13,6 @@ const UploadImage = () => {
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
   };
-  console.log("=========", userId);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,22 +20,18 @@ const UploadImage = () => {
     try {
       const formData = new FormData();
       formData.append("image", selectedImage);
-      console.log("formData", formData);
       await userServices.upload(userId, formData);
 
       navigate(`/users/${userId}`);
-      // Image uploaded successfully
-      console.log("Image uploaded!");
     } catch (error) {
-      // Handle error
       console.error("Error uploading image:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.upload}>
       <div>
-        <label htmlFor="image">Image</label>
+        <h4>Image</h4>
         <input
           type="file"
           id="image"
@@ -41,7 +39,7 @@ const UploadImage = () => {
           onChange={handleImageChange}
         />
       </div>
-      <button type="submit">Upload</button>
+      <Button type="submit">Upload</Button>
     </form>
   );
 };

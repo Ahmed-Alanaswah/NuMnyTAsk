@@ -18,7 +18,6 @@ const Deals = lazy(() => import("../pages/Deals"));
 
 const RoutesContainer = () => {
   const { user, isLogin, setIsLogin, setUser } = useContext(AuthContext);
-  console.log("===", isLogin);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -29,7 +28,6 @@ const RoutesContainer = () => {
         const user = jwt(token);
         setUser(user);
         if (user?.id) {
-          console.log(user);
           setIsLogin(true);
         } else {
           setIsLogin(false);

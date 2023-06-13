@@ -3,7 +3,7 @@ import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import styles from "../styles/header.module.css";
 import { AuthContext } from "../context/AuthContext";
 import jwt from "jwt-decode";
-import { userServices } from "../services/user.services";
+import { userServices } from "../services/user.services.js";
 
 const Header = () => {
   const { user, setUser, isLogin, setIsLogin } = useContext(AuthContext);
@@ -34,7 +34,7 @@ const Header = () => {
   }, [token]);
 
   return (
-    <div className={styles.header}>
+    <div className={styles.header} data-testid="header">
       <div>
         {isLogin ? (
           <div className={styles.links}>

@@ -1,0 +1,23 @@
+.editPage {
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  padding: 15px 30px;
+  margin-bottom: 30px;
+  color: #5fa089;
+  border-color: #5fa089;
+  background-color: #fff;
+}
+
+.upload {
+  margin: 50px;
+}
+
+.upload button {
+  margin-top: 50px;
+}

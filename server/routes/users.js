@@ -61,7 +61,6 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log(file);
     updatedUserData.image = (file && file.path) || null;
     await user.update(updatedUserData);
     res.json({ message: "User updated successfully" });

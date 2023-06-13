@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/pagination.module.css";
+import Button from "./Button";
 
 const Pagination = ({ currentPage, totalPages, onPageChange, children }) => {
   // Other necessary state variables
@@ -16,11 +17,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange, children }) => {
   };
 
   return (
-    <div>
+    <div data-testid="pagination">
       {children}
       <div className={styles.pagination}>
-        <button onClick={handlePreviousPage}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
+        <Button style={{ borderRadius: "30px" }} onClick={handlePreviousPage}>
+          Previous
+        </Button>
+        <Button style={{ borderRadius: "30px" }} onClick={handleNextPage}>
+          Next
+        </Button>
       </div>
     </div>
   );

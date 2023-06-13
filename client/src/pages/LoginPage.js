@@ -18,7 +18,6 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     const res = await loginService.login(data);
-    console.log(res.data);
     if (res.data.error) {
       alert(res.data.error);
     } else {

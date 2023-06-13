@@ -2,7 +2,7 @@
   padding: 30px 50px;
 }
 
-.pagination button {
+.button {
   cursor: pointer;
   margin: 30px;
   background-color: #5fa089;
@@ -13,6 +13,6 @@
   transition: 0.5s ease-in;
 }
 
-.pagination button:hover {
+.button:hover {
   background-color: #5fa0829e;
 }

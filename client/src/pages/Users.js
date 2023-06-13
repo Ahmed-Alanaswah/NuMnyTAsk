@@ -3,6 +3,7 @@ import styles from "../styles/card.module.css";
 import { userServices } from "../services/user.services";
 import UserCard from "../components/UserCard";
 import Pagination from "../components/Pagination";
+import Button from "../components/Button";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -66,9 +67,9 @@ const Users = () => {
           />
         ))}
       </div>
-      <button onClick={deleteUsers} className={styles.deleteButton}>
+      <Button onClick={deleteUsers} style={styles.deleteButton}>
         delete users
-      </button>
+      </Button>
     </Pagination>
   );
 };

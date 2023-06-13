@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dealServices } from "../services/deal.services";
 import { getQueryParam } from "../helpers/helpers";
+import styles from "../styles/editPage.module.css";
+import Button from "../components/Button";
 
 const EditDealStatus = () => {
   const dealId = getQueryParam("dealId");
@@ -24,9 +26,9 @@ const EditDealStatus = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.editPage}>
       <div>
-        <label>Edit deal Status:</label>
+        <h4>Edit deal Status:</h4>
         <select value={newStatus} name="status" onChange={handleStatusChange}>
           <option value="Active">Active</option>
           <option value="In Active">In Active</option>
@@ -34,7 +36,7 @@ const EditDealStatus = () => {
           <option value="Expired">Expired</option>
         </select>
       </div>
-      <button type="submit">Update</button>
+      <Button type="submit">Update</Button>
     </form>
   );
 };
