@@ -23,7 +23,7 @@ router.get("/:id", [auth], async (req, res) => {
   res.json(User);
 });
 
-router.post("/", [auth, admin, validateUser], async (req, res) => {
+router.post("/", [validateUser], async (req, res) => {
   try {
     const User = req.body;
     const user = await Users.findOne({ where: { email: User.email } });
@@ -34,7 +34,7 @@ router.post("/", [auth, admin, validateUser], async (req, res) => {
 
       password: hashedPassword,
     });
-    res.json(User);
+    res.json(_.pick(User, ["name", "email"]));
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
