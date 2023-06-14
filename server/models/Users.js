@@ -55,9 +55,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // Users.associate = (models) => {
-  //   // ClaimedDeal.belongsTo(models.Users);
-  //   ClaimedDeal.belongsTo(models.Deals);
-  // };
   return Users;
 };

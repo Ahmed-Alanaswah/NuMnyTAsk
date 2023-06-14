@@ -1,24 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-// const image = require('../images')
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { validateUser } = require("../middleware/validateUser");
 const { auth } = require("../middleware/auth");
 const { admin } = require("../middleware/admin");
-
-const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "../images");
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = `${new Date().toISOString()}`;
-    cb(null, `${uniqueSuffix}-${file.originalname}`);
-  },
-});
-const upload = multer({ storage: fileStorage }).single("image");
 
 router.get("/", [auth], async (req, res) => {
   const listOfUser = await Users.findAll();
@@ -28,6 +15,11 @@ router.get("/", [auth], async (req, res) => {
 router.get("/:id", [auth], async (req, res) => {
   const id = req.params.id;
   const User = await Users.findByPk(id);
+
+  if (!User) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
   res.json(User);
 });
 
@@ -76,7 +68,9 @@ router.delete("/", async (req, res) => {
     await Users.destroy({ where: { id: idsList } });
     res.status(200).json({ message: "User(s) deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res
+      .status(500)
+      .json({ error: "Internal server error", message: error.message });
   }
 });
 
