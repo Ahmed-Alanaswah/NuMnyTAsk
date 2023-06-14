@@ -23,7 +23,7 @@ router.get("/:id", [auth], async (req, res) => {
   res.json(User);
 });
 
-router.post("/", [validateUser], async (req, res) => {
+router.post("/", [auth, admin, validateUser], async (req, res) => {
   try {
     const User = req.body;
     const user = await Users.findOne({ where: { email: User.email } });
