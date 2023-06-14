@@ -58,7 +58,25 @@ router.put("/:id", async (req, res) => {
 
     updatedUserData.image = (file && file.path) || null;
     await user.update(updatedUserData);
-    res.json({ message: "User updated successfully" });
+    res.json(updatedUserData);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  const userId = req.params.id;
+  const updatedUserData = req.body;
+
+  try {
+    const user = await Users.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    await user.update(updatedUserData);
+    res.json(updatedUserData);
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ message: "Internal server error" });

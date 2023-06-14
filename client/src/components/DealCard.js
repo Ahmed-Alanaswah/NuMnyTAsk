@@ -30,7 +30,11 @@ const DealCard = ({ deal, claimDealHandler }) => {
       <div>status: {deal?.status}</div>
       <Button onClick={() => claimDealHandler(deal?.id)}>claim deal </Button>
       {user?.isAdmin && (
-        <Button onClick={() => navigate(`/deal-status?dealId=${deal?.id}`)}>
+        <Button
+          onClick={() =>
+            navigate(`/deal-status?dealId=${deal?.id}&userId=${user?.id}`)
+          }
+        >
           edit status
         </Button>
       )}

@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 const EditUserStatus = () => {
   const userId = getQueryParam("userId");
-  const [newStatus, setNewStatus] = useState("");
+  const [newStatus, setNewStatus] = useState("Active");
 
   const navigate = useNavigate();
 
@@ -17,9 +17,11 @@ const EditUserStatus = () => {
     event.preventDefault();
 
     try {
-      await userServices.update(userId, { status: newStatus });
+      await userServices.patch(userId, { status: newStatus });
       navigate(`/users`);
-    } catch (error) {}
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

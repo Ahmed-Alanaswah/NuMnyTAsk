@@ -16,7 +16,7 @@ const Header = () => {
       localStorage.removeItem("token");
       setIsLogin(false);
       navigate("/login");
-      await userServices.update(user?.id, { lastLoginDateTime: date });
+      await userServices.patch(user?.id, { lastLoginDateTime: date });
     } catch (error) {
       console.error(error);
     }

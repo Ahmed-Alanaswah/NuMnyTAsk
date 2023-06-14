@@ -46,17 +46,17 @@ const RoutesContainer = () => {
           <>
             {user?.isAdmin && (
               <>
-                <Route path="/" exact element={<Home />} />
                 <Route path="/create-user" element={<CreateUser />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/claim-deals" element={<ClaimedDeals />} />
-                <Route path="/upload" element={<UploadImage />} />
+
                 <Route path="/create-deals" element={<CreateDeal />} />
                 <Route path="/edit-status" element={<EditUserStatus />} />
                 <Route path="/deal-status" element={<EditDealStatus />} />
               </>
             )}
-
+            <Route path="/upload" element={<UploadImage />} />
+            <Route path="/" exact element={<Home />} />
             <Route path="/users/:id" element={<UserProfile />} />
             <Route path="/deals" element={<Deals />} />
           </>

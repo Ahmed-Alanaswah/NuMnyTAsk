@@ -7,8 +7,8 @@ import Button from "../components/Button";
 
 const EditDealStatus = () => {
   const dealId = getQueryParam("dealId");
-  const [newStatus, setNewStatus] = useState("");
-  console.log(newStatus);
+  const userId = getQueryParam("userId");
+  const [newStatus, setNewStatus] = useState("Active");
   const navigate = useNavigate();
 
   const handleStatusChange = (e) => setNewStatus(e.target.value);
@@ -19,7 +19,7 @@ const EditDealStatus = () => {
 
     try {
       await dealServices.update(dealId, { status: newStatus });
-      navigate(`/deals`);
+      navigate(`/deals?userId=${userId}`);
     } catch (error) {
       console.error(error);
     }

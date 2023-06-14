@@ -28,4 +28,6 @@ export const userServices = {
 
   update: async (userId, data) =>
     await axios.put(`http://localhost:3000/api/users/${userId}`, data),
+  patch: async (userId, data) =>
+    await axios.patch(`http://localhost:3000/api/users/${userId}`, data),
 };
