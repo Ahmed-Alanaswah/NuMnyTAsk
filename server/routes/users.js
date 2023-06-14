@@ -25,16 +25,19 @@ router.get("/:id", [auth], async (req, res) => {
 
 router.post("/", [auth, admin, validateUser], async (req, res) => {
   try {
-    const User = req.body;
-    const user = await Users.findOne({ where: { email: User.email } });
-    if (user) return res.status(400).json("user already registered");
-    const hashedPassword = await bcrypt.hash(User.password, 10);
-    await Users.create({
-      ...User,
-
+    const userData = req.body;
+    const existingUser = await Users.findOne({
+      where: { email: userData.email },
+    });
+    if (existingUser) {
+      return res.status(400).json("User already registered");
+    }
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const createdUser = await Users.create({
+      ...userData,
       password: hashedPassword,
     });
-    res.json(_.pick(User, ["name", "email"]));
+    res.json(_.pick(createdUser, ["id", "name", "email"]));
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
